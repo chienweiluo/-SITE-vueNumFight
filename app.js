@@ -11,26 +11,17 @@ new Vue({
             this.playerHealth = 100;
             this.monsterHealth = 100;
         },
-        attack: function(){
-            var max=10;
-            var min=3;
-            var damage= Math.max(Math.floor(Math.random()* max)+ 1 ,min);
-            this.monsterHealth -= damage;
+        attack: function(){  
+            this.monsterHealth -= this.calculateDamage(3,10);
             
-            if(this.monsterHealth <= 0){
-                alert('YOU WON');
-                this.gameisRunning = false;
-                return;
-            } 
-            max = 12;
-            min = 5;
-            damage= Math.max(Math.floor(Math.random()* max)+ 1 ,min);
-            this.playerHealth -= damage;
-            
-            if(this.playerHealth <= 0){
-                alert('YOU LOSE');
-                this.gameisRunning = false; 
+            if(this.checkWin()){
+                return
             }
+            max = 12;
+            min = 5; 
+            this.playerHealth -= this.calculateDamage(5,12);
+              
+            this.checkWin();
             
         },
         specialAttack: function(){
@@ -42,5 +33,28 @@ new Vue({
         giveUp: function(){
             
         }, 
+        calculateDamage: function(min,max){
+            return Math.max(Math.floor(Math.random()* max)+ 1 ,min)
+        },
+        checkWin: function(){ 
+            if(this.monsterHealth <= 0){
+                if (confirm('YOU WON! NEW GAME?')){;
+                this.startGAME()
+                                                  }
+                else{
+                    this.gameisRunning = false
+                }
+                return true;                      
+            }else if(this.playerHealth<= 0){
+                if (confirm('YOU lost! NEW GAME?')){;
+                this.startGAME()                 }
+                else{
+                    this.gameisRunning = false
+                }
+                return true;                      
+            }
+            return false;
+            
+        }
     }
 });
