@@ -1,4 +1,11 @@
-# VuejsExercise
+# VuejsPractice
+
+#foundation #Vuejs #component
+
 a simple web application
-GAME 
+
+GAME Concept 
+
 player & monster attacks and display the status
+
+CodePen: https://codepen.io/chienweiluo/pen/MmegpZ
